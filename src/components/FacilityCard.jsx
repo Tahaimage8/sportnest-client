@@ -12,6 +12,7 @@ const FacilityCard = ({ facility }) => {
       />
 
       <div className="p-5">
+{/* <Link href={`/facility/${facility._id}`}> */}
         <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">
           {facility.facility_type}
         </span>
@@ -29,6 +30,7 @@ const FacilityCard = ({ facility }) => {
           <Users size={17} />
           Capacity: {facility.capacity} people
         </p>
+{/* </Link> */}
 
         <div className="mt-5 flex items-center justify-between gap-3">
           <p className="font-bold text-slate-900">
@@ -37,7 +39,8 @@ const FacilityCard = ({ facility }) => {
           </p>
 
           <Link
-            href={`/facility/${facility._id}`}
+            href={`/facilities/${facility._id}`}
+            // href={`#`}
             className="rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-700"
           >
             Book Now
