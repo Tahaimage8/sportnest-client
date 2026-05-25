@@ -42,7 +42,7 @@ const AddFacilityPage = () => {
 
       const data = await res.json();
 
-      if (data.insertedId) {
+      if (data.insertedId) { 
         toast.success("Facility added successfully!");
         e.target.reset();
         router.push("/");
