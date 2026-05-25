@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 
 
+
+import { EditModal } from "@/components/EditModal";
+import { Button } from "@heroui/react";
 import { MapPin, Users, Clock, Mail, BadgeDollarSign } from "lucide-react";
+import { BiEdit } from "react-icons/bi";
 
 
 const FacilitiesDetailsPage = async ({ params }) => {
@@ -23,7 +27,6 @@ const FacilitiesDetailsPage = async ({ params }) => {
     available_slots,
     description,
     owner_email,
-    booking_count,
   } = facility;
 
   return (
@@ -31,7 +34,7 @@ const FacilitiesDetailsPage = async ({ params }) => {
       <div className="mx-auto max-w-7xl">
         <div className="grid items-start gap-8 lg:grid-cols-2">
           {/* Image */}
-          <div className="h-fit overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="h-fit overflow-hidden my-auto rounded-xl border border-slate-200 bg-white shadow-sm">
             <img
               src={image}
               alt={name}
@@ -46,8 +49,8 @@ const FacilitiesDetailsPage = async ({ params }) => {
                 {facility_type}
               </span>
 
-              <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600">
-                Bookings: {booking_count || 0}
+              <span>
+           <EditModal  facility={facility}/>
               </span>
             </div>
 
