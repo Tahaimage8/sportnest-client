@@ -2,6 +2,7 @@
 
 
 
+import DeleteDialog from "@/components/DeleteDialog";
 import { EditModal } from "@/components/EditModal";
 import { Button } from "@heroui/react";
 import { MapPin, Users, Clock, Mail, BadgeDollarSign } from "lucide-react";
@@ -50,7 +51,10 @@ const FacilitiesDetailsPage = async ({ params }) => {
               </span>
 
               <span>
-           <EditModal  facility={facility}/>
+        <div className="flex gap-2">
+               <EditModal  facility={facility}/>
+               <DeleteDialog facility={facility}/>
+        </div>
               </span>
             </div>
 
