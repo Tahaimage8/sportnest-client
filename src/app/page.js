@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Banner from "@/components/Banner";
 
 export default function Home() {
   return (
     <div>
-      <h1 className="text-4xl font-bold text-center mt-10">Welcome to My Next.js App!</h1>
+      <Banner/>
     </div>
   );
 }
