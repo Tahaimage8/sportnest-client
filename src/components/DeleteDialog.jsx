@@ -28,7 +28,7 @@ const DeleteDialog = ({ facility }) => {
     return (
         <div>
               <AlertDialog>
-      <Button className="text-red-500 " variant="outline"><CiTrash />Delete Project</Button>
+      <Button className="text-red-500 " variant="outline"><CiTrash />Delete </Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog className="sm:max-w-100">
