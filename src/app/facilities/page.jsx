@@ -1,14 +1,15 @@
 // import React from 'react';
 
 import FacilityCard from "@/components/FacilityCard";
+import { Label, SearchField } from "@heroui/react";
 
-const facilitiesPage = async() => {
-const res =await fetch('http://localhost:5000/facilities')
-const facilities =await res.json();
-// console.log(facilities)
+const facilitiesPage = async () => {
+  const res = await fetch("http://localhost:5000/facilities");
+  const facilities = await res.json();
+  // console.log(facilities)
 
-    return (
-  <section className="min-h-screen bg-slate-50 px-4 py-12">
+  return (
+    <section className="min-h-screen bg-slate-50 px-4 py-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
           <p className="font-semibold uppercase tracking-wide text-green-600">
@@ -23,6 +24,16 @@ const facilities =await res.json();
             Browse available sports facilities and choose your preferred venue
             for practice, training, or friendly matches.
           </p>
+          <div>
+            <SearchField name="search">
+              <Label>Search</Label>
+              <SearchField.Group>
+                <SearchField.SearchIcon />
+                <SearchField.Input className="w-70" placeholder="Search..." />
+                <SearchField.ClearButton />
+              </SearchField.Group>
+            </SearchField>
+          </div>
         </div>
 
         {facilities.length === 0 ? (
@@ -38,7 +49,7 @@ const facilities =await res.json();
         )}
       </div>
     </section>
-    );
+  );
 };
 
 export default facilitiesPage;
