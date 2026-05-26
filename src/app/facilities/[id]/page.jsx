@@ -2,6 +2,7 @@
 
 
 
+import BookingActions from "@/components/BookingActions";
 import DeleteDialog from "@/components/DeleteDialog";
 import { EditModal } from "@/components/EditModal";
 import { Button } from "@heroui/react";
@@ -99,24 +100,9 @@ const FacilitiesDetailsPage = async ({ params }) => {
             </div>
 
             {/* Available Slots */}
-            <div className="mt-6 rounded-2xl bg-slate-50 p-4">
-              <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                <Clock size={18} className="text-green-600" />
-                Available Time Slots
-              </p>
+            {/* Booking Button */}
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                {available_slots?.map((slot, index) => (
-                  <span
-                    key={index}
-                    className="rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm"
-                  >
-                    {slot}
-                  </span>
-                ))}
-              </div>
-            </div>
-
+        <BookingActions facility={facility}/>
                 
 
           </div>

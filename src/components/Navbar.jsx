@@ -27,6 +27,8 @@ const Navbar = () => {
     { name: "Manage My Facilities", path: "/manage-facilities" },
   ];
 
+  const links = [...publicLinks, ...privateLinks];
+
   const handleCloseMenu = () => {
     setOpen(false);
   };
@@ -79,7 +81,7 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden items-center gap-7 lg:flex">
-          {publicLinks.map(({ name, path }) => (
+          {links.map(({ name, path }) => (
             <Link
               key={path}
               href={path}
@@ -97,11 +99,11 @@ const Navbar = () => {
         {/* Desktop Auth/Profile */}
         <div className="hidden items-center gap-3 lg:flex">
           {user ? (
-            <Dropdown className="">
+            <Dropdown>
               <Button
                 aria-label="Profile menu"
                 variant="secondary"
-                className="flex items-center gap-2 p rounded-full border border-slate-200 bg-white px-3 py-2 text-slate-800 hover:bg-slate-50"
+                className="flex items-center gap-2 rounded-full  border-slate-200 bg-white py-5 text-slate-800 hover:bg-slate-50"
               >
                 <Avatar>
                   <Avatar.Image
@@ -144,18 +146,21 @@ const Navbar = () => {
               </Dropdown.Popover>
             </Dropdown>
           ) : (
-          <><Link
+            <>
+              <Link
                 href="/login"
                 className="rounded-xl border border-green-600 px-5 py-2.5 text-sm font-semibold text-green-600 transition hover:bg-green-50"
               >
                 Login
-              </Link><Link
+              </Link>
+
+              <Link
                 href="/register"
                 className="rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700"
               >
-                  Register
-                </Link></>
-            
+                Register
+              </Link>
+            </>
           )}
         </div>
 
@@ -173,7 +178,7 @@ const Navbar = () => {
       {open && (
         <div className="border-t border-slate-200 bg-white lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5">
-            {publicLinks.map(({ name, path }) => (
+            {links.map(({ name, path }) => (
               <Link
                 key={path}
                 href={path}
@@ -207,21 +212,6 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                {privateLinks.map(({ name, path }) => (
-                  <Link
-                    key={path}
-                    href={path}
-                    onClick={handleCloseMenu}
-                    className={`font-semibold transition ${
-                      pathname === path
-                        ? "text-green-600"
-                        : "text-slate-700 hover:text-green-600"
-                    }`}
-                  >
-                    {name}
-                  </Link>
-                ))}
-
                 <button
                   type="button"
                   onClick={async () => {
@@ -234,17 +224,23 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-             <><Link
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <Link
                   href="/login"
-                  className="rounded-xl border border-green-600 px-5 py-2.5 text-sm font-semibold text-green-600 transition hover:bg-green-50"
+                  onClick={handleCloseMenu}
+                  className="rounded-xl border border-green-600 px-5 py-2.5 text-center font-semibold text-green-600"
                 >
                   Login
-                </Link><Link
+                </Link>
+
+                <Link
                   href="/register"
-                  className="rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-green-700"
+                  onClick={handleCloseMenu}
+                  className="rounded-xl bg-green-600 px-5 py-2.5 text-center font-semibold text-white"
                 >
-                    Register
-                  </Link></>
+                  Register
+                </Link>
+              </div>
             )}
           </div>
         </div>

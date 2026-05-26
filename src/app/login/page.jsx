@@ -11,11 +11,13 @@ import {
   Label,
   TextField,
   Card,
+  Separator,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -49,7 +51,10 @@ const LoginPage = () => {
       setLoading(false);
     }
   };
-
+const handleGoogle = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+  })}
   return (
     <section className="min-h-screen bg-slate-50 px-4 py-12">
       <div className="mx-auto flex max-w-7xl items-center justify-center">
@@ -144,6 +149,16 @@ const LoginPage = () => {
                   </Link>
                 </p>
               </Form>
+               <div className="flex justify-center items-center gap-4">
+                <Separator>
+                <div className="whitespace-nowrap">
+                    Or Register With 
+                </div>
+                </Separator>
+              </div>
+              <div>
+                <Button onClick={handleGoogle} variant="outline" className="w-full rounded-none"><FcGoogle/> Sign in with Google</Button>
+              </div>
             </Card>
           </motion.div>
         </motion.div>

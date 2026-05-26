@@ -5,7 +5,7 @@ import FacilityCard from "@/components/FacilityCard";
 const facilitiesPage = async() => {
 const res =await fetch('http://localhost:5000/facilities')
 const facilities =await res.json();
-console.log(facilities)
+// console.log(facilities)
 
     return (
   <section className="min-h-screen bg-slate-50 px-4 py-12">
