@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Check } from "@gravity-ui/icons";
 import {
   Button,
@@ -14,7 +15,7 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 const RegisterPage = () => {
@@ -37,7 +38,7 @@ const RegisterPage = () => {
 
     if (data) {
       toast.success("Register successful");
-      router.push("/");
+      redirect("/login");
     }
 
     if (error) {
@@ -168,6 +169,16 @@ const RegisterPage = () => {
                     {loading ? "Registering..." : "Register"}
                   </Button>
                 </motion.div>
+
+                <p className="text-center text-sm text-slate-600">
+                  Already have an account?{" "}
+                  <Link
+                    href="/login"
+                    className="font-semibold text-green-600 hover:text-green-700"
+                  >
+                    Login
+                  </Link>
+                </p>
               </Form>
             </Card>
           </motion.div>
