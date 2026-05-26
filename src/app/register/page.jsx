@@ -137,7 +137,7 @@ const handleGoogle = async () => {
                   name="password"
                   type="password"
                   validate={(value) => {
-                    if (value.length < 8) {
+                    if (value.length < 6) {
                       return "Password must be at least 8 characters";
                     }
                     if (!/[A-Z]/.test(value)) {
