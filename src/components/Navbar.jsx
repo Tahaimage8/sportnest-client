@@ -7,6 +7,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Button, Dropdown, Label } from "@heroui/react";
 import toast from "react-hot-toast";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -61,7 +62,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md dark:bg-slate-950/90">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -98,6 +99,8 @@ const Navbar = () => {
 
         {/* Desktop Auth/Profile */}
         <div className="hidden items-center gap-3 lg:flex">
+
+            <ThemeToggle />
           {user ? (
             <Dropdown>
               <Button
@@ -172,11 +175,16 @@ const Navbar = () => {
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
+        
       </nav>
 
       {/* Mobile Menu */}
       {open && (
         <div className="border-t border-slate-200 bg-white lg:hidden">
+<div className=" flex justify-end p-3">
+  
+              <ThemeToggle />
+</div>
           <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5">
             {links.map(({ name, path }) => (
               <Link

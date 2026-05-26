@@ -2,7 +2,9 @@ import BookingCard from "@/components/BookingCard";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 
 const MyBookingsPage = async () => {
   const session = await auth.api.getSession({
@@ -10,12 +12,14 @@ const MyBookingsPage = async () => {
   });
 
   const user = session?.user;
-
+  if (!user) {
+    redirect("/login");
+  }
   const res = await fetch(`http://localhost:5000/booking/${user.id}`);
 
   const bookings = await res.json();
 
-  console.log(bookings);
+  // console.log(bookings);
 
   return (
     <section className="min-h-screen bg-slate-50 px-4 py-12">

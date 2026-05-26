@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { MdPageview } from "react-icons/md";
 import BookingCancelAlert from "./BookingCancelAlert";
-import { BadgeDollarSign, CalendarDays, Clock, MapPin } from "lucide-react";
+import { BadgeDollarSign, CalendarDays, Clock, MapPin, User } from "lucide-react";
 
 const BookingCard = ({ booking }) => {
 
@@ -19,9 +19,11 @@ const BookingCard = ({ booking }) => {
     facility_type,
     bookingDate,
     facilityId,
+    userEmail
   } = booking;
+  
 
-  //   console.log(booking);
+    console.log(booking);
   return (
     <div className="mx-auto max-w-7xl p-2 my-5">
       <Card className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
@@ -56,7 +58,7 @@ const BookingCard = ({ booking }) => {
                 {description}
               </p>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl bg-slate-50 p-3">
                   <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                     <Clock size={17} className="text-green-600" />
@@ -77,6 +79,13 @@ const BookingCard = ({ booking }) => {
                       month: "long",
                     })}
                   </p>
+                </div>
+                                <div className="rounded-2xl bg-slate-50 p-3">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                    <User size={17} className="text-green-600" />
+                    UserEmail
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">{booking?.userEmail}</p>
                 </div>
               </div>
             </div>
