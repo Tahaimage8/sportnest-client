@@ -22,7 +22,7 @@ const ManageFacilities = () => {
              const {data: tokenData} = await authClient.token();
 
         const res = await fetch(
-          `http://localhost:5000/my-facilities/${encodeURIComponent(user.email)}`,{
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/my-facilities/${encodeURIComponent(user.email)}`,{
             headers: {
                "authorization": `Bearer ${tokenData?.token}`
             }

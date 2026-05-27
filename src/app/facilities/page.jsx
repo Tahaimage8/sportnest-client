@@ -21,7 +21,7 @@ const facilitiesPage = async ({ searchParams }) => {
     }
 
     const res = await fetch(
-      `http://localhost:5000/facilities?${queryParams.toString()}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/facilities?${queryParams.toString()}`,
       {
         cache: "no-store",
       }

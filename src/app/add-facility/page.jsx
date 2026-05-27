@@ -37,7 +37,7 @@ const email = user?.email || "";
     };
 
     try {
-      const res = await fetch("http://localhost:5000/facilities", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
