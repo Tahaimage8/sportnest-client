@@ -112,7 +112,7 @@ const BookingCard = ({ booking }) => {
               <div className="space-y-1">
                 <p className="flex items-center gap-2 text-sm font-bold text-slate-900">
                   <BadgeDollarSign size={17} className="text-green-600" />
-                  Price: ${price_per_hour}/perHour
+                  Price: ৳{price_per_hour}/perHour
                 </p>
 
                 <p className="flex items-center gap-2 text-xs text-slate-500">
