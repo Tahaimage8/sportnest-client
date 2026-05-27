@@ -5,15 +5,23 @@
 import BookingActions from "@/components/BookingActions";
 import DeleteDialog from "@/components/DeleteDialog";
 import { EditModal } from "@/components/EditModal";
-import { Button } from "@heroui/react";
-import { MapPin, Users, Clock, Mail, BadgeDollarSign } from "lucide-react";
-import { BiEdit } from "react-icons/bi";
+import { auth } from "@/lib/auth";
+
+import { MapPin, Users, Mail, BadgeDollarSign } from "lucide-react";
+import { headers } from "next/headers";
 
 
 const FacilitiesDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const {token} = await  auth.api.getToken({
+    headers: await headers()
+  })
 
+  console.log(token)
   const res = await fetch(`http://localhost:5000/facilities/${id}`, {
+    headers:{
+       authorization : `Bearer ${token}`
+    },
     cache: "no-store",
   });
 

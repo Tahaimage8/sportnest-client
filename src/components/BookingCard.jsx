@@ -29,7 +29,7 @@ const BookingCard = ({ booking }) => {
     status,
   } = booking;
 
-  console.log(booking);
+  // console.log(booking);
 
   return (
     <div className="mx-auto my-5 max-w-7xl p-2">

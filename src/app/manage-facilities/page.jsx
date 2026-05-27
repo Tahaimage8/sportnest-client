@@ -9,14 +9,44 @@ const ManageFacilities = () => {
   const user = session?.user;
 
   const [facilities, setFacilities] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email) return;
+    const getMyFacilities = async () => {
+      if (!user?.email) {
+        setLoading(false);
+        return;
+      }
 
-    fetch(`http://localhost:5000/my-facilities/${(user.email)}`)
-      .then((res) => res.json())
-      .then((data) => setFacilities(data));
-  }, [user?.email]);
+      try {
+             const {data: tokenData} = await authClient.token();
+
+        const res = await fetch(
+          `http://localhost:5000/my-facilities/${encodeURIComponent(user.email)}`,{
+            headers: {
+               "authorization": `Bearer ${tokenData?.token}`
+            }
+          }
+
+        );
+
+        const data = await res.json();
+if (Array.isArray(data)) {
+  setFacilities(data);
+} else {
+  setFacilities([]);
+}
+
+      } catch (error) {
+        console.log(error);
+        setFacilities([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getMyFacilities();
+  }, [user?.email, session?.accessToken, session?.session?.token]);
 
   return (
     <section className="min-h-screen bg-slate-50 px-4 py-12">
@@ -35,7 +65,11 @@ const ManageFacilities = () => {
           </p>
         </div>
 
-        {facilities.length === 0 ? (
+        {loading ? (
+          <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-600">
+            Loading facilities...
+          </div>
+        ) : facilities.length === 0 ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center text-slate-600">
             No facilities found.
           </div>

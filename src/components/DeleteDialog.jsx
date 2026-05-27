@@ -1,6 +1,8 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import {AlertDialog, Button} from "@heroui/react";
 import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 import { CiTrash } from "react-icons/ci";
 
 
@@ -13,17 +15,28 @@ const DeleteDialog = ({ facility }) => {
   } = facility;
 
   const handleDelete = async () => {
+            const {data: tokenData} = await authClient.token();
     const res = await fetch(`http://localhost:5000/facilities/${_id}`,{
         method:"DELETE",
         headers:{
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "authorization": `Bearer ${tokenData?.token}`
         }
         
     })
 
     const data = await res.json()
+
+    
+        if(res.ok){
+        toast.success("Facility deleted successfully")
     redirect('/facilities')
-    console.log(data)
+        }
+        if(!res.ok){
+            toast.error("Failed to delete facility")
+        }
+
+
   }
     return (
         <div>

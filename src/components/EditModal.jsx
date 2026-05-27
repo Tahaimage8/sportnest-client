@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
 
 export const EditModal = ({ facility }) => {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ export const EditModal = ({ facility }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+        const {data: tokenData} = await authClient.token();
     const formData = new FormData(e.target);
     const updatedFacility = Object.fromEntries(formData);
 
@@ -44,6 +45,7 @@ export const EditModal = ({ facility }) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          "authorization": `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(finalUpdatedFacility),
       });

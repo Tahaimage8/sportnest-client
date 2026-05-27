@@ -1,10 +1,21 @@
+"use client";
+
 /* eslint-disable @next/next/no-img-element */
+
 import Link from "next/link";
 import { MapPin, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const FacilityCard = ({ facility }) => {
   return (
-    <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      whileHover={{ y: -6 }}
+      className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-xl"
+    >
       <img
         src={facility.image}
         alt={facility.name}
@@ -12,7 +23,6 @@ const FacilityCard = ({ facility }) => {
       />
 
       <div className="p-5">
-{/* <Link href={`/facility/${facility._id}`}> */}
         <span className="inline-block rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">
           {facility.facility_type}
         </span>
@@ -30,7 +40,6 @@ const FacilityCard = ({ facility }) => {
           <Users size={17} />
           Capacity: {facility.capacity} people
         </p>
-{/* </Link> */}
 
         <div className="mt-5 flex items-center justify-between gap-3">
           <p className="font-bold text-slate-900">
@@ -40,14 +49,13 @@ const FacilityCard = ({ facility }) => {
 
           <Link
             href={`/facilities/${facility._id}`}
-            // href={`#`}
             className="rounded-xl bg-green-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-green-700"
           >
             Book Now
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,26 +1,39 @@
 "use client"
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import React from "react";
+import toast from "react-hot-toast";
 import { CiTrash } from "react-icons/ci";
 
 const BookingCancelAlert = ({ booking }) => {
+
   const {
     name,
     _id
   } = booking;
 //   console.log(_id)
-
+    // const {data: tokenData} = await authClient.token();
   const handleDelete= async()=>{
+        const {data: tokenData} = await authClient.token();
+
     const res = await fetch(`http://localhost:5000/booking/${_id}`,{
         method: "DELETE",
         headers:{
-            "content-type" : "application/json"
+            "content-type" : "application/json",
+              authorization : `Bearer ${tokenData?.token}`
         }
     })
 
     const data = await res.json();
     // console.log(data)
+
+    if(res.ok){
+        toast.success("Booking cancelled successfully")
     window.location.reload();
+    }
+    if(!res.ok){
+        toast.error("Failed to cancel booking")
+    }
   }
   return (
     <div>
