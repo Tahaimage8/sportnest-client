@@ -12,12 +12,24 @@ const MyBookingsPage = async () => {
   });
 
   const user = session?.user;
+
   if (!user) {
     redirect("/login");
   }
-  const res = await fetch(`http://localhost:5000/booking/${user.id}`);
 
-  const bookings = await res.json();
+  let bookings = [];
+
+  try {
+    const res = await fetch(`http://localhost:5000/booking/${user.id}`, {
+      cache: "no-store",
+    });
+
+    if (res.ok) {
+      bookings = await res.json();
+    }
+  } catch (error) {
+    bookings = [];
+  }
 
   // console.log(bookings);
 

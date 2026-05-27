@@ -3,9 +3,19 @@ import FacilityCard from "./FacilityCard";
 import Link from "next/link";
 
 const FeaturedFacilities = async () => {
-  const res = await fetch("http://localhost:5000/facilities");
+ let facilities = [];
 
-  const facilities = await res.json();
+  try {
+    const res = await fetch("http://localhost:5000/facilities", {
+      cache: "no-store",
+    });
+
+    if (res.ok) {
+      facilities = await res.json();
+    }
+  } catch (error) {
+    facilities = [];
+  }
 
   const data = facilities.slice(0, 6);
 

@@ -4,9 +4,19 @@ import FacilityCard from "@/components/FacilityCard";
 import { Label, SearchField } from "@heroui/react";
 
 const facilitiesPage = async () => {
-  const res = await fetch("http://localhost:5000/facilities");
-  const facilities = await res.json();
-  // console.log(facilities)
+ let facilities = [];
+
+  try {
+    const res = await fetch("http://localhost:5000/facilities", {
+      cache: "no-store",
+    });
+
+    if (res.ok) {
+      facilities = await res.json();
+    }
+  } catch (error) {
+    facilities = [];
+  }
 
   return (
     <section className="min-h-screen bg-slate-50 px-4 py-12">
