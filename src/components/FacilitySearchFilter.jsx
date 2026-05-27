@@ -2,10 +2,34 @@
 
 import { Button, Dropdown, Label, SearchField } from "@heroui/react";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const FacilitySearchFilter = () => {
-  const [type, setType] = useState("");
+const FacilitySearchFilter = ({ defaultSearch = "", defaultType = "" }) => {
+  const router = useRouter();
+
+  const [searchQuery, setSearchQuery] = useState(defaultSearch);
+  const [type, setType] = useState(defaultType);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams();
+
+      if (searchQuery) {
+        params.set("search", searchQuery);
+      }
+
+      if (type) {
+        params.set("type", type);
+      }
+
+      const queryString = params.toString();
+
+      router.push(queryString ? `/facilities?${queryString}` : "/facilities");
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, type, router]);
 
   return (
     <form className="mx-auto mt-8 flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -22,7 +46,7 @@ const FacilitySearchFilter = () => {
 
           <Dropdown.Popover>
             <Dropdown.Menu
-              onAction={(key) => setType(key === "all" ? "" : key)}
+              onAction={(key) => setType(key === "all" ? "" : String(key))}
             >
               <Dropdown.Item id="all" textValue="All Facilities">
                 <Label>All Facilities</Label>
@@ -57,8 +81,13 @@ const FacilitySearchFilter = () => {
       </div>
 
       {/* Right Search + Button */}
-      <div className="flex w-full flex-row gap-3 sm:flex-row md:w-auto md:items-center">
-        <SearchField name="search" className="w-full sm:w-96">
+      <div className="flex w-full flex-row gap-3 md:w-auto md:items-center">
+        <SearchField
+          name="search"
+          value={searchQuery}
+          onChange={setSearchQuery}
+          className="w-full sm:w-96"
+        >
           <SearchField.Group className="h-12 rounded-xl border border-slate-300 bg-white px-3">
             <SearchField.SearchIcon />
 

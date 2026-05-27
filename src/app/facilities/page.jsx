@@ -1,16 +1,31 @@
-// import React from 'react';
-
 import FacilityCard from "@/components/FacilityCard";
 import FacilitySearchFilter from "@/components/FacilitySearchFilter";
-import { Label, SearchField } from "@heroui/react";
 
-const facilitiesPage = async () => {
- let facilities = [];
+const facilitiesPage = async ({ searchParams }) => {
+  const params = await searchParams;
+
+  const search = params?.search || "";
+  const type = params?.type || "";
+
+  let facilities = [];
 
   try {
-    const res = await fetch("http://localhost:5000/facilities", {
-      cache: "no-store",
-    });
+    const queryParams = new URLSearchParams();
+
+    if (search) {
+      queryParams.set("search", search);
+    }
+
+    if (type) {
+      queryParams.set("type", type);
+    }
+
+    const res = await fetch(
+      `http://localhost:5000/facilities?${queryParams.toString()}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (res.ok) {
       facilities = await res.json();
@@ -35,7 +50,8 @@ const facilitiesPage = async () => {
             Browse available sports facilities and choose your preferred venue
             for practice, training, or friendly matches.
           </p>
-          <FacilitySearchFilter/>
+
+          <FacilitySearchFilter defaultSearch={search} defaultType={type} />
         </div>
 
         {facilities.length === 0 ? (
