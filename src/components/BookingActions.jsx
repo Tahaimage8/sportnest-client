@@ -5,6 +5,7 @@ import { Button, DateField, Label } from "@heroui/react";
 import { Clock } from "lucide-react";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 const BookingActions = ({ facility }) => {
   const { data: session } = authClient.useSession();
@@ -29,7 +30,8 @@ const BookingActions = ({ facility }) => {
   const handleBookNow = async () => {
     if (!user) {
       toast.error("Please login first");
-      return;
+      redirect("/login")
+      // return;
     }
 
     if (!bookingDate) {
