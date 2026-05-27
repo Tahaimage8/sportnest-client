@@ -1,6 +1,7 @@
 // import React from 'react';
 
 import FacilityCard from "@/components/FacilityCard";
+import FacilitySearchFilter from "@/components/FacilitySearchFilter";
 import { Label, SearchField } from "@heroui/react";
 
 const facilitiesPage = async () => {
@@ -34,16 +35,7 @@ const facilitiesPage = async () => {
             Browse available sports facilities and choose your preferred venue
             for practice, training, or friendly matches.
           </p>
-          <div>
-            <SearchField name="search">
-              <Label>Search</Label>
-              <SearchField.Group>
-                <SearchField.SearchIcon />
-                <SearchField.Input className="w-70" placeholder="Search..." />
-                <SearchField.ClearButton />
-              </SearchField.Group>
-            </SearchField>
-          </div>
+          <FacilitySearchFilter/>
         </div>
 
         {facilities.length === 0 ? (
