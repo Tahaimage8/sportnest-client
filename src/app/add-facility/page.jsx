@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   FieldError,
@@ -13,6 +14,10 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const AddFacilityPage = () => {
+    const { data: session } = authClient.useSession();
+  const user = session?.user;
+const email = user?.email || "";
+  // console.log(user)
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -171,7 +176,7 @@ const AddFacilityPage = () => {
 
             {/* Owner Email */}
             <div className="md:col-span-2">
-              <TextField name="owner_email" isRequired>
+              <TextField value={email} name="owner_email" isRequired>
                 <Label className={"mb-2 block text-sm font-semibold text-slate-800"}>Owner Email</Label>
 
                 <Input

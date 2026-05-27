@@ -1,14 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, Card, Chip, CloseButton } from "@heroui/react";
+import { Card, Chip } from "@heroui/react";
 import Link from "next/link";
 
 import React from "react";
 import { MdPageview } from "react-icons/md";
 import BookingCancelAlert from "./BookingCancelAlert";
-import { BadgeDollarSign, CalendarDays, Clock, MapPin, User } from "lucide-react";
+import {
+  BadgeDollarSign,
+  CalendarDays,
+  Clock,
+  MapPin,
+  User,
+  CircleCheck,
+} from "lucide-react";
 
 const BookingCard = ({ booking }) => {
-
   const {
     name,
     description,
@@ -19,21 +25,20 @@ const BookingCard = ({ booking }) => {
     facility_type,
     bookingDate,
     facilityId,
-    userEmail
+    userEmail,
+    status,
   } = booking;
-  
 
-    console.log(booking);
+  console.log(booking);
+
   return (
-    <div className="mx-auto max-w-7xl p-2 my-5">
+    <div className="mx-auto my-5 max-w-7xl p-2">
       <Card className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-
-        <div className="absolute right-4 top-4 z-10  ">
+        <div className="absolute right-4 top-4 z-10">
           <BookingCancelAlert booking={booking} />
         </div>
 
         <div className="flex flex-col gap-5 md:flex-row">
-  
           <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-2xl bg-slate-100 md:h-44 md:w-56">
             <img
               alt={name}
@@ -49,7 +54,6 @@ const BookingCard = ({ booking }) => {
             </div>
           </div>
 
-
           <div className="flex flex-1 flex-col justify-between pr-0 md:pr-28">
             <div>
               <h2 className="text-xl font-bold text-slate-900">{name}</h2>
@@ -58,7 +62,7 @@ const BookingCard = ({ booking }) => {
                 {description}
               </p>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="rounded-2xl bg-slate-50 p-3">
                   <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                     <Clock size={17} className="text-green-600" />
@@ -80,12 +84,25 @@ const BookingCard = ({ booking }) => {
                     })}
                   </p>
                 </div>
-                                <div className="rounded-2xl bg-slate-50 p-3">
+
+                <div className="rounded-2xl bg-slate-50 p-3">
                   <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                     <User size={17} className="text-green-600" />
                     UserEmail
                   </p>
-                  <p className="mt-1 text-sm text-slate-600">{booking?.userEmail}</p>
+                  <p className="mt-1 break-all text-sm text-slate-600">
+                    {userEmail}
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-slate-50 p-3">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                    <CircleCheck size={17} className="text-green-600" />
+                    Status
+                  </p>
+                  <p className="mt-1 inline-block rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold capitalize text-yellow-700">
+                    {status || "pending"}
+                  </p>
                 </div>
               </div>
             </div>

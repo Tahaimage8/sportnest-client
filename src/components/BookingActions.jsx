@@ -57,11 +57,13 @@ const BookingActions = ({ facility }) => {
       description,
       owner_email,
       selectedSlot,
-      bookingDate : new Date(bookingDate),
-
+      bookingDate: new Date(bookingDate),
+      hours: 1,
+      total_price: Number(price_per_hour),
+      status: "pending",
     };
 
-    console.log(bookingData)
+    console.log(bookingData);
     try {
       const res = await fetch("http://localhost:5000/booking", {
         method: "POST",
