@@ -50,11 +50,11 @@ const RegisterPage = () => {
     setLoading(false);
   };
 
-const handleGoogle = async () => {
-  const data = await authClient.signIn.social({
-    provider: "google",
-  });
-};
+  const handleGoogle = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <section className="min-h-screen bg-slate-50 px-4 py-12">
       <div className="mx-auto flex max-w-7xl items-center justify-center">
@@ -130,7 +130,6 @@ const handleGoogle = async () => {
                   />
                   <FieldError className="text-sm text-red-500" />
                 </TextField>
-
                 <TextField
                   isRequired
                   minLength={6}
@@ -152,13 +151,16 @@ const handleGoogle = async () => {
                   <Label className="mb-1 block text-sm font-semibold text-slate-800">
                     Password
                   </Label>
+
                   <Input
                     placeholder="Enter your password"
                     className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 outline-none focus:border-green-600"
                   />
+
                   <Description className="text-xs text-slate-500">
-                    Must be at least 8 characters with 1 uppercase and 1 number
+                    Must be at least 6 characters with 1 uppercase and 1 number
                   </Description>
+
                   <FieldError className="text-sm text-red-500" />
                 </TextField>
 
@@ -189,13 +191,17 @@ const handleGoogle = async () => {
               </Form>
               <div className="flex justify-center items-center gap-4">
                 <Separator>
-                <div className="whitespace-nowrap">
-                    Or Register With 
-                </div>
+                  <div className="whitespace-nowrap">Or Register With</div>
                 </Separator>
               </div>
               <div>
-                <Button onClick={handleGoogle} variant="outline" className="w-full rounded-none"><FcGoogle/> Sign in with Google</Button>
+                <Button
+                  onClick={handleGoogle}
+                  variant="outline"
+                  className="w-full rounded-none"
+                >
+                  <FcGoogle /> Sign in with Google
+                </Button>
               </div>
             </Card>
           </motion.div>
